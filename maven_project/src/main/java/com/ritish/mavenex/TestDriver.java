@@ -5,6 +5,15 @@ import java.util.Collections;
 import java.util.Scanner;
 class TestDriver
 {
+    static int get_totalweight(ArrayList<Gifts> al)
+    {
+        int totalweight=0;
+        for(Gifts i : al)
+        {
+            totalweight+=i.get_weight();
+        }
+        return totalweight;
+    }
 public static void main(String[] args) {
     Scanner sc =new Scanner(System.in);
     int sugarcontent = 0;
@@ -15,112 +24,98 @@ public static void main(String[] args) {
     int choco_weight = 0;
     int choco_price = 0;
     String Choco_name = "";
+    String type="";
 
-    System.out.println("Enter the Sweet details ");
-    System.out.println("Enter the Details of MysorePak");
-    System.out.println("Enter the SugarContent of MysorePak");
-    sugarcontent = sc.nextInt();
-    System.out.println("Enter the weight ");
-    weight = sc.nextInt();
-    System.out.println("Enter the price ");
-    price = sc.nextInt();
-    System.out.println("Enter the sweetname");
-    sweetname =sc.next();
-    MysorePak mysorepak =new MysorePak(sugarcontent, weight, price, sweetname);
-    
-    
-    System.out.println("Enter the Details of Rasgulla");
-    System.out.println("Enter the SugarContent of Rasgulla");
-    sugarcontent = sc.nextInt();
-    System.out.println("Enter the weight ");
-    weight = sc.nextInt();
-    System.out.println("Enter the price ");
-    price = sc.nextInt();
-    System.out.println("Enter the sweetname");
-    sweetname =sc.next();
-    Rasgulla rasgulla = new Rasgulla(sugarcontent, weight, price, sweetname);
+    System.out.println("Enter the number of Gifts");
+    int n =sc.nextInt();
+    ArrayList<Gifts> list =new ArrayList<Gifts>();
+    for(int i=0;i<n;i++)
+    {
+          System.out.println("Enter the type of Gift");
+          type=sc.next();
+          if(type.equals("Chocolates"))
+          {
+              System.out.println("Enter the chocolatecontent");
+            chocolatecontent = sc.nextInt();
+            System.out.println("Enter the weight ");
+            choco_weight = sc.nextInt();
+            System.out.println("Enter the price ");
+            choco_price = sc.nextInt();
+            System.out.println("Enter the Chocolatename");
+            Choco_name =sc.next();
+            
+            if(Choco_name.equals("Hersheys"))
+            {
+                Hersheys h= new Hersheys(chocolatecontent, choco_weight, choco_price, Choco_name, type);
+                list.add(h);
+            }
+            else if(Choco_name.equals("FerreroRocher"))
+            {
+                FerreroRocher f=new FerreroRocher(chocolatecontent, choco_weight, choco_price, Choco_name, type);
+                list.add(f);
+            }
+            else
+            {
+              Snickers s =new Snickers(chocolatecontent, choco_weight, choco_price, Choco_name, type);
+              list.add(s);
+            }
 
-       
-
-    System.out.println("Enter the Details of KajuKatli");
-    System.out.println("Enter the SugarContent of KajuKatli");
-    sugarcontent = sc.nextInt();
-    System.out.println("Enter the weight ");
-    weight = sc.nextInt();
-    System.out.println("Enter the price ");
-    price = sc.nextInt();
-    System.out.println("Enter the sweetname");
-    sweetname =sc.next();
-    KajuKatli kajuKatli = new KajuKatli(sugarcontent, weight, price, sweetname);
-
+          } 
+          else
+          {
+            System.out.println("Enter the SugarContent of "+type);
+            sugarcontent = sc.nextInt();
+            System.out.println("Enter the weight ");
+            weight = sc.nextInt();
+            System.out.println("Enter the price ");
+            price = sc.nextInt();
+            System.out.println("Enter the sweetname");
+            sweetname =sc.next();
+            if(sweetname.equals("KajuKatli"))
+            {
+                KajuKatli k =new KajuKatli(sugarcontent, weight, price, sweetname, type);
+                list.add(k);
+            }
+            else if(sweetname.equals("MysorePak"))
+            {
+                MysorePak m =new MysorePak(sugarcontent, weight, price, sweetname, type);
+                list.add(m);
+            }
+            else
+            {
+                Rasgulla r =new Rasgulla(sugarcontent, weight, price, sweetname, type);
+                list.add(r);
+            }
+          }  
+    }
    
-    ArrayList<Sweets> list =new ArrayList<Sweets>();
-    list.add(mysorepak);
-    list.add(rasgulla);
-    list.add(kajuKatli);
-
-    for(Sweets s:list)
-    {
-        System.out.println(s);
-    }
-    
-    int totalweight = 0;
-    for(Sweets sweets: list)
-    {
-        totalweight+=sweets.get_weight();
-    }
+    int totalweight = get_totalweight(list);
     System.out.println("The Total Weight is "+totalweight);
    
-    System.out.println("Enter the Chocolate details ");
-    System.out.println("Enter the Details of Hersheys");
-    System.out.println("Enter the ChocolateContent of Hersheys");
-    chocolatecontent = sc.nextInt();
-    System.out.println("Enter the weight ");
-    choco_weight = sc.nextInt();
-    System.out.println("Enter the price ");
-    choco_price = sc.nextInt();
-    System.out.println("Enter the chocolate name");
-    Choco_name =sc.next();
-    Hersheys hersheys =new Hersheys(chocolatecontent,choco_weight , choco_price, Choco_name);
-    
-    
-    System.out.println("Enter the Details of Snickers");
-    System.out.println("Enter the ChocolateContent of Snickers");
-    chocolatecontent = sc.nextInt();
-    System.out.println("Enter the weight ");
-    choco_weight = sc.nextInt();
-    System.out.println("Enter the price ");
-    choco_price = sc.nextInt();
-    System.out.println("Enter the chocolate name");
-    Choco_name =sc.next();
-    Snickers snickers =new Snickers(chocolatecontent,choco_weight , choco_price, Choco_name);
-
-      
-
-    
-    System.out.println("Enter the Details of Ferrero Rocher");
-    System.out.println("Enter the ChocolateContent of Ferrero Rocher");
-    chocolatecontent = sc.nextInt();
-    System.out.println("Enter the weight ");
-    choco_weight = sc.nextInt();
-    System.out.println("Enter the price ");
-    choco_price = sc.nextInt();
-    System.out.println("Enter the chocolate name");
-    Choco_name =sc.next();
-    FerreroRocher ferreroRocher= new FerreroRocher(chocolatecontent,choco_weight , choco_price, Choco_name);
-
-    ArrayList<Chocolates> chocolates = new ArrayList<Chocolates>();
-    chocolates.add(hersheys);
-    chocolates.add(ferreroRocher);
-    chocolates.add(snickers);
-
-
-    Collections.sort(chocolates,new ChocolatesSorter());
+    Collections.sort(list,new ChocolatesSorter());
     System.out.println("After Sorting the Chocolates based on Weights");
-    for(Chocolates c: chocolates)
+    for(Gifts c: list)
     {
+        if(c.get_type().equals("Chocolates"))
         System.out.println(c);
     }
+    
+    System.out.println("Enter the min value for range of weights");
+    int min = sc.nextInt();
+    System.out.println("Enter the max value for range of weights");
+    int max = sc.nextInt();
+    System.out.println("Gifts in the range ");
+    for(Gifts g : list)
+    {
+        if(g.get_weight()>=min && g.get_weight()<=max)
+        {
+            System.out.println(g);
+        }
+    }
+ 
+   
+    
+   
     sc.close();
    
 

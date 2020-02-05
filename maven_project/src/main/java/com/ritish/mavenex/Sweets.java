@@ -1,17 +1,20 @@
 package com.ritish.mavenex;
 
-public abstract class Sweets
+public abstract class Sweets extends Gifts
 {
    private int sugar_content;
    private int weight;
    private int price;
    private String sweetname;
-   public Sweets(int sugar_content,int weight,int price,String sweetname)
+   private String type;
+   public Sweets(int sugar_content,int weight,int price,String sweetname,String type)
    {
+       super(price,weight,type);
        this.sugar_content=sugar_content;
        this.weight=weight;
        this.price=price;
        this.sweetname=sweetname;
+       this.type=type;
    }
    public String get_sweetname()
    {
@@ -29,7 +32,7 @@ public abstract class Sweets
     {
         return price;
     }
-abstract void Sweet_description();
+abstract void description();
  
 @Override
  public String toString() {
